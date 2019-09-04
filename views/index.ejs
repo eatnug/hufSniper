@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>강의시간표</title>
+    <meta http-equiv="imagetoolbar" content="no">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script language="javascript">
+        function test(value){
+            console.log(value)
+        }
+        function onChange(value) {
+            if (value == 1) {
+                document.getElementById('major').style.display = 'block'
+                document.getElementById('minor').style.display = 'none'
+                document.getElementById('minor').value = ''
+            } else if (value == 2) {
+                document.getElementById('major').style.display = 'none'
+                document.getElementById('major').value = ''
+                document.getElementById('minor').style.display = 'block'
+            }
+        }
+
+        function modalOn() {
+            document.getElementById('modal').style.display = "block"
+        }
+
+        function modalOff() {
+            $('#list_modal').html('')
+            document.getElementById('modal').style.display = "none"
+        }
+    </script>
+</head>
+
+<body>
+    <div class="modal" id="modal" style="display: none;">
+        <form name="form1" id="form" method="post" action="/">
+            <input type="hidden" name="tab_lang" value="K">
+            <div class="table write margin_top30">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>년도/학기(Year/Semester)</th>
+                            <td>
+                                <div class="selectBox">
+                                    <select name="ag_ledg_year" onchange="time_submit()">
+
+                                        <option value="2019" selected="">&nbsp;2019&nbsp;</option>
+
+                                        <option value="2018">&nbsp;2018&nbsp;</option>
+
+                                        <option value="2017">&nbsp;2017&nbsp;</option>
+
+                                        <option value="2016">&nbsp;2016&nbsp;</option>
+
+                                        <option value="2015">&nbsp;2015&nbsp;</option>
+
+                                        <option value="2014">&nbsp;2014&nbsp;</option>
+
+                                        <option value="2013">&nbsp;2013&nbsp;</option>
+
+                                        <option value="2012">&nbsp;2012&nbsp;</option>
+
+                                        <option value="2011">&nbsp;2011&nbsp;</option>
+
+                                        <option value="2010">&nbsp;2010&nbsp;</option>
+
+                                        <option value="2009">&nbsp;2009&nbsp;</option>
+
+                                        <option value="2008">&nbsp;2008&nbsp;</option>
+
+                                        <option value="2007">&nbsp;2007&nbsp;</option>
+
+                                        <option value="2006">&nbsp;2006&nbsp;</option>
+
+                                        <option value="2005">&nbsp;2005&nbsp;</option>
+
+                                        <option value="2004">&nbsp;2004&nbsp;</option>
+
+                                        <option value="2003">&nbsp;2003&nbsp;</option>
+
+                                        <option value="2002">&nbsp;2002&nbsp;</option>
+
+                                        <option value="2001">&nbsp;2001&nbsp;</option>
+
+                                        <option value="2000">&nbsp;2000&nbsp;</option>
+
+                                        <option value="1999">&nbsp;1999&nbsp;</option>
+
+                                    </select>
+                                </div>
+                                <div class="selectBox">
+                                    <select name="ag_ledg_sessn">
+                                        <option value="1">&nbsp;1st Semester&nbsp;</option>
+                                        <option value="2">&nbsp;Summer Session&nbsp;</option>
+                                        <option value="3" selected="">&nbsp;2nd Semester&nbsp;</option>
+                                        <option value="4">&nbsp;Winter Session&nbsp;</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>소속(Affiliation)</th>
+                            <td>
+                                <div class="selectBox">
+                                    <select name="ag_org_sect">
+
+                                        <option value="A" selected="">
+                                            &nbsp;학부&nbsp;(Undergraduate)&nbsp;</option>
+
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>캠퍼스(Campus)</th>
+                            <td>
+                                <select name="campus_sect">
+                                    <option value="H1">서울</option>
+                                    <option value="H2">글로벌</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                전공/교양(Major/Minor)
+                                <select name="gubun" id="catSel" onchange="onChange(value)">
+                                    <option value="1"> 전공</option>
+                                    <option value="2"> 교양</option>
+                                </select></th>
+                            <td>
+                                <div class="selectBox">
+                                    <select name="ag_crs_strct_cd" id="major">
+
+                                        <option value="AAR01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;CORE글로벌지역학&nbsp;(CORE Global Studies)&nbsp;
+                                        </option>
+
+                                        <option value="A1CE1_H1" selected="">
+                                            &nbsp;(서울)&nbsp;-&nbsp;EICC학과&nbsp;(Department of English for International
+                                            Conferences and Communication)&nbsp;
+                                        </option>
+
+                                        <option value="A1CG1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;ELLT학과&nbsp;(Department of English Linguistics &amp;
+                                            Language Technology)&nbsp;
+                                        </option>
+
+                                        <option value="AAQ01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;EU전공&nbsp;(EU Major)&nbsp;
+                                        </option>
+
+                                        <option value="AAMB1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;FATI전공&nbsp;(FATI)&nbsp;
+                                        </option>
+
+                                        <option value="A5A_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;KFL학부&nbsp;(Division of Korean as a Foreign
+                                            Language)&nbsp;
+                                        </option>
+
+                                        <option value="AKAA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;Language &amp; Diplomacy전공&nbsp;(Language &amp;
+                                            Diplomacy)&nbsp;
+                                        </option>
+
+                                        <option value="AKA_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;Language &amp; Diplomacy학부&nbsp;(Division of Language
+                                            &amp; Diplomacy)&nbsp;
+                                        </option>
+
+                                        <option value="A2AA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;Language &amp; Trade전공&nbsp;(Language &amp;
+                                            Trade)&nbsp;
+                                        </option>
+
+                                        <option value="A2A_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;Language &amp; Trade학부&nbsp;(Division of Language
+                                            &amp; Trade)&nbsp;
+                                        </option>
+
+                                        <option value="ALA_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;경영학부&nbsp;(Business Administration Division)&nbsp;
+                                        </option>
+
+                                        <option value="ALAA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;경영학전공&nbsp;(Business Administration)&nbsp;
+                                        </option>
+
+                                        <option value="AEC_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;경제학부&nbsp;(Division of Economics)&nbsp;
+                                        </option>
+
+                                        <option value="AECA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;경제학전공&nbsp;(Economics)&nbsp;
+                                        </option>
+
+                                        <option value="ACDD1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;광고·PR·브랜딩전공&nbsp;(Advertising·Public
+                                            Relations·Branding)&nbsp;
+                                        </option>
+
+                                        <option value="AFF01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;교육학&nbsp;(Education)&nbsp;
+                                        </option>
+
+                                        <option value="ACAI1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;국가리더전공&nbsp;(National Leader)&nbsp;
+                                        </option>
+
+                                        <option value="AEAA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;국제통상학과&nbsp;(Department of International Economics
+                                            and Law)&nbsp;
+                                        </option>
+
+                                        <option value="AGA_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;국제학부&nbsp;(Division of International Studies)&nbsp;
+                                        </option>
+
+                                        <option value="AGAA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;국제학전공&nbsp;(International Studies)&nbsp;
+                                        </option>
+
+                                        <option value="AAH01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;네덜란드어과&nbsp;(Department of Dutch)&nbsp;
+                                        </option>
+
+                                        <option value="AAD01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;노어과&nbsp;(Department of Russian)&nbsp;
+                                        </option>
+
+                                        <option value="AAC01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;독일어과&nbsp;(Department of German)&nbsp;
+                                        </option>
+
+                                        <option value="AFC01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;독일어교육과&nbsp;(Department of German Education)&nbsp;
+                                        </option>
+
+                                        <option value="ABP02_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;동북아외교통상전공&nbsp;(North-East Asian Foreign Affairs and
+                                            Commerce)&nbsp;
+                                        </option>
+
+                                        <option value="ANJA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;디지털인문한국학전공&nbsp;(Digital Korean Studies in
+                                            Humanities)&nbsp;
+                                        </option>
+
+                                        <option value="ABC01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;말레이.인도네시아어과&nbsp;(Department of
+                                            Malay-Indonesian)&nbsp;
+                                        </option>
+
+                                        <option value="ABJ01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;몽골어과&nbsp;(Department of Mongolian)&nbsp;
+                                        </option>
+
+                                        <option value="ANDD2_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;문화콘텐츠학전공&nbsp;(Cultural Contents Major)&nbsp;
+                                        </option>
+
+                                        <option value="ACD_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;미디어커뮤니케이션학부&nbsp;(Division of Media &amp;
+                                            Communication)&nbsp;
+                                        </option>
+
+                                        <option value="ACDE1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;방송·영상·뉴미디어전공&nbsp;(Broadcasting·Film·New Media)&nbsp;
+                                        </option>
+
+                                        <option value="ABF01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;베트남어과&nbsp;(Department of Vietnamese)&nbsp;
+                                        </option>
+
+                                        <option value="AAP01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;브릭스전공&nbsp;(BRICs Major)&nbsp;
+                                        </option>
+
+                                        <option value="ANDB2_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;사학과&nbsp;(Department of History)&nbsp;
+                                        </option>
+
+                                        <option value="AANA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;세계문화예술경영전공&nbsp;(Art and Cultural Mediation)&nbsp;
+                                        </option>
+
+                                        <option value="AAI01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;스칸디나비아어과&nbsp;(Department of Scandinavian
+                                            Languages)&nbsp;
+                                        </option>
+
+                                        <option value="AAE01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;스페인어과&nbsp;(Department of Spanish)&nbsp;
+                                        </option>
+
+                                        <option value="ABD01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;아랍어과&nbsp;(Department of Arabic)&nbsp;
+                                        </option>
+
+                                        <option value="ACDA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;언론·정보전공&nbsp;(Journalism &amp; Information)&nbsp;
+                                        </option>
+
+                                        <option value="A1CF1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;언어와공학전공&nbsp;(Language and Technology)&nbsp;
+                                        </option>
+
+                                        <option value="ANDC2_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;언어인지과학과&nbsp;(Department of Linguistics and Cognitive
+                                            Science)&nbsp;
+                                        </option>
+
+                                        <option value="A1CD1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;영미문학·문화학과&nbsp;(Department of English Literature and
+                                            Culture)&nbsp;
+                                        </option>
+
+                                        <option value="AFA01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;영어교육과&nbsp;(Department of English Education)&nbsp;
+                                        </option>
+
+                                        <option value="A1CA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;영어학과&nbsp;(Department of English Linguistics)&nbsp;
+                                        </option>
+
+                                        <option value="A5A01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;외국어로서의한국어교육전공&nbsp;(Korean Education as a Foreign
+                                            Language)&nbsp;
+                                        </option>
+
+                                        <option value="A5A02_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;외국어로서의한국어통번역전공&nbsp;(Korean Interpretation &amp;
+                                            Translation as a Foreign Language)&nbsp;
+                                        </option>
+
+                                        <option value="ATMB2_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;융복합소프트웨어전공&nbsp;(Software Convergence Major)&nbsp;
+                                        </option>
+
+                                        <option value="AJDA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;융합일본지역전공&nbsp;(Integrated Japanese Studies)&nbsp;
+                                        </option>
+
+                                        <option value="AJD_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;융합일본지역학부&nbsp;(Division of Integrated Japanese
+                                            Studies)&nbsp;
+                                        </option>
+
+                                        <option value="ABI01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;이란어과&nbsp;(Department of Persian)&nbsp;
+                                        </option>
+
+                                        <option value="AAF01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;이탈리아어과&nbsp;(Department of Italian)&nbsp;
+                                        </option>
+
+                                        <option value="ABG01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;인도어과&nbsp;(Department of Hindi)&nbsp;
+                                        </option>
+
+                                        <option value="AJCA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;일본언어문화전공&nbsp;(Japanese Language, Literature and
+                                            Culture)&nbsp;
+                                        </option>
+
+                                        <option value="AJC_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;일본언어문화학부&nbsp;(Division of Japanese Language,
+                                            Literature and Culture)&nbsp;
+                                        </option>
+
+                                        <option value="ACBA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;정치외교학과&nbsp;(Department of Political Science and
+                                            Diplomacy)&nbsp;
+                                        </option>
+
+                                        <option value="AFI01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;중국어교육과&nbsp;(Department of Chinese Education)&nbsp;
+                                        </option>
+
+                                        <option value="AICA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;중국언어문화전공&nbsp;(Chinese Language, Literature and
+                                            Culture)&nbsp;
+                                        </option>
+
+                                        <option value="AIC_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;중국언어문화학부&nbsp;(Division of Chinese Language,
+                                            Literature and Culture)&nbsp;
+                                        </option>
+
+                                        <option value="AIDA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;중국외교통상전공&nbsp;(Chinese Foreign Affairs and
+                                            Commerce)&nbsp;
+                                        </option>
+
+                                        <option value="AID_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;중국외교통상학부&nbsp;(Division of Chinese Foreign Affairs
+                                            and Commerce)&nbsp;
+                                        </option>
+
+                                        <option value="ANDA2_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;철학과&nbsp;(Department of Philosophy)&nbsp;
+                                        </option>
+
+                                        <option value="ABE01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;태국어과&nbsp;(Department of Thai)&nbsp;
+                                        </option>
+
+                                        <option value="ABH11_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;터키.아제르바이잔어과&nbsp;(Department of Turkish and
+                                            Azerbaijani)&nbsp;
+                                        </option>
+
+                                        <option value="AAK01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;포르투갈어과&nbsp;(Department of Portuguese)&nbsp;
+                                        </option>
+
+                                        <option value="AAMC1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;프랑스.EU전공&nbsp;(French and European Studies)&nbsp;
+                                        </option>
+
+                                        <option value="AFB01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;프랑스어교육과&nbsp;(Department of French Education)&nbsp;
+                                        </option>
+
+                                        <option value="AAM_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;프랑스어학부&nbsp;(Division of French Language)&nbsp;
+                                        </option>
+
+                                        <option value="AAMA1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;프랑스응용어문학전공&nbsp;(Applied French Linguistics and
+                                            Literature)&nbsp;
+                                        </option>
+
+                                        <option value="AFD01_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;한국어교육과&nbsp;(Department of Korean Education)&nbsp;
+                                        </option>
+
+                                        <option value="ACBB1_H1">
+                                            &nbsp;(서울)&nbsp;-&nbsp;행정학과&nbsp;(Department of Public Administration)&nbsp;
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="selectBox">
+                                    <select name="ag_compt_fld_cd" selected="" id="minor" style="display: none">
+
+                                        <option value="301_H1" selected="">
+                                            &nbsp;인문강좌(서울)&nbsp;
+                                        </option>
+
+                                        <option value="302_H1">
+                                            &nbsp;교양외국어(서울)&nbsp;
+                                        </option>
+
+                                        <option value="32Z_H1">
+                                            &nbsp;공동교양(한예종)(서울)&nbsp;
+                                        </option>
+
+                                        <option value="330_H1">
+                                            &nbsp;언어와문학(서울)&nbsp;
+                                        </option>
+
+                                        <option value="331_H1">
+                                            &nbsp;문화와예술(서울)&nbsp;
+                                        </option>
+
+                                        <option value="332_H1">
+                                            &nbsp;역사와철학(서울)&nbsp;
+                                        </option>
+
+                                        <option value="334_H1">
+                                            &nbsp;과학과기술(서울)&nbsp;
+                                        </option>
+
+                                        <option value="335_H1">
+                                            &nbsp;핵심인문기초(서울)&nbsp;
+                                        </option>
+
+                                        <option value="336_H1">
+                                            &nbsp;인간과사회(서울)&nbsp;
+                                        </option>
+
+                                        <option value="340_H1">
+                                            &nbsp;미네르바인성교육(서울)&nbsp;
+                                        </option>
+
+                                        <option value="341_H1">
+                                            &nbsp;시민교육(서울)&nbsp;
+                                        </option>
+
+                                        <option value="351_H1">
+                                            &nbsp;HUFS CAREER(서울)&nbsp;
+                                        </option>
+
+                                        <option value="353_H1">
+                                            &nbsp;미래시뮬레이션(서울)&nbsp;
+                                        </option>
+
+                                        <option value="354_H1">
+                                            &nbsp;생활과운동(서울)&nbsp;
+                                        </option>
+
+                                        <option value="355_H1">
+                                            &nbsp;실용외국어(선택)(서울)&nbsp;
+                                        </option>
+
+                                        <option value="356_H1">
+                                            &nbsp;외국인을 위한 한국학(서울)&nbsp;
+                                        </option>
+
+                                        <option value="357_H1">
+                                            &nbsp;삶과지혜(서울)&nbsp;
+                                        </option>
+
+                                        <option value="61_H1">
+                                            &nbsp;군사학(서울)&nbsp;
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        <div class="btn_area">
+            <button id='sbmt' class="blue" name="btnSearch">submit</button>
+        </div>
+        <div class="courses list" id="list_modal">
+
+        </div>
+        <button onclick="modalOff()">done</button>
+    </div>
+    <div class="main" id="main">
+        <div class="header">
+            <div class="addBtn">
+                <button onClick="modalOn()">add</button>
+            </div>
+        </div>
+        <div class="courses pick" id="list_main">
+
+        </div>
+    </div>
+    <script>
+        $('#sbmt').click(function () {
+            $.ajax({
+                url: './getList',
+                crossDomain: true,
+                type: 'POST',
+                data: $('#form').serialize(),
+                success: function (data) {
+                    $('#list_modal').html(data);
+                    $('#list_modal tr').each((i, e) => {
+                        let tmp
+                        if (i == 0) $(e).remove()
+                        else {
+                            $(e).find('td').each((ind, cur) => {
+                                if(ind == 3) {tmp = cur}
+                                else if (ind == 4 || ind == 4 || ind == 11 ||
+                                    ind == 14 || ind == 15) console.log(cur)
+                                else $(cur).remove()
+                            })
+                            $(e).attr('onclick',`(() => {
+                                $('#list_main').append('<div cn="${tmp.innerHTML}">'+$(this).html()+'</div>')
+                            })()`)
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
