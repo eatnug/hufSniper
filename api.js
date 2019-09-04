@@ -1,10 +1,5 @@
 const axios = require('axios')
 const qs = require('qs')
-const parser = require('node-html-parser')
-const jsdom = require("jsdom");
-const {
-    JSDOM
-} = jsdom;
 const cheerio = require('cheerio');
 
 const data = qs.stringify({
@@ -14,20 +9,15 @@ const data = qs.stringify({
     ag_org_sect: "A",
     campus_sect: "H!",
     ag_crs_strct_cd: "A1CE1_H1",
+    cn:"A01731103",
 })
 
-axios.post('https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp', data, {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    })
+axios.post('https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp', data, {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'})
     .then((res) => {
+        const CN = qs.parse(data).cn
         const $ = cheerio.load(res.data);
-        // const titles = []
-        // $("#premier1 table tr td div font").each((ind, cur) => {
-        //     if(cur.firstChild.data) console.log(cur.firstChild.data)
-        // })
         $("#premier1 > div > table > tbody > tr > td").each((i, e) => {
-            if(e.firstChild && e.firstChild.data!=undefined && e.attribs.class && e.firstChild.next.next.next.lastChild.firstChild && e.firstChild.next.next.next.lastChild.firstChild.data) console.log(e.firstChild.next.next.next.lastChild.firstChild.data)
-            else if(e.firstChild && e.firstChild.data!=undefined) console.log(e.firstChild.data.trim())
+            if(e.firstChild && e.firstChild.data==CN) console.log(e.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.firstChild.data)
         })
     })
     .catch((error) => {
