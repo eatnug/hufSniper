@@ -9,16 +9,27 @@ const data = qs.stringify({
     ag_org_sect: "A",
     campus_sect: "H!",
     ag_crs_strct_cd: "A1CE1_H1",
-    cn:"A01731103",
+    cn: "A01731103",
 })
 
-axios.post('https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp', data, {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'})
-    .then((res) => {
-        const CN = qs.parse(data).cn
+const parseGetLeftSeat = async (res, CN) => {
+    return new Promise((resolve, reject) => {
         const $ = cheerio.load(res.data);
         $("#premier1 > div > table > tbody > tr > td").each((i, e) => {
-            if(e.firstChild && e.firstChild.data==CN) console.log(e.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.firstChild.data)
+            if (e.firstChild && e.firstChild.data == CN) {
+                const tmp = e.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.firstChild.data.split('/')
+                resolve(Number(tmp[1].trim()) - Number(tmp[0].trim()))
+            }
         })
+    })
+}
+
+axios.post('https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp', data, {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    })
+    .then(async (res) => {
+        const CN = qs.parse(data).cn
+        console.log((await parseGetLeftSeat(res, CN)))
     })
     .catch((error) => {
         console.error(error)
