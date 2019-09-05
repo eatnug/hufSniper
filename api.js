@@ -23,7 +23,6 @@ const cn = "A01733102"
  * @param {*} data 포스트로 넘길 폼 데이터 qs stringify
  */
 async function getData(data) {
-    console.log(data)
     return await axios.post("https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp", data, {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'});
 }
 
@@ -47,11 +46,8 @@ const parseGetLeftSeat = async (res, CN) => {
 const scanEmpty = async(data, CN, cb) => {
     if(await parseGetLeftSeat(await getData(data), CN)) cb()
     else {
-        setTimeout(async() => {
-            await scanEmpty(data,CN,cb)
-        })
+        await scanEmpty(data,CN,cb)
     }
 }
 
-console.log(data)
 module.exports = {getData, parseGetLeftSeat, scanEmpty}
