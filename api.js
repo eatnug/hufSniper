@@ -37,7 +37,7 @@ const parseGetLeftSeat = async (res, CN) => {
         $("#premier1 > div > table > tbody > tr > td").each((i, e) => {
             if (e.firstChild && e.firstChild.data == CN && e.next) {
                 const tmp = e.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.firstChild.data.split('/')
-                resolve(Number(tmp[1].trim()) - Number(tmp[0].trim()) == 0 ? false : true)
+                resolve(Number(tmp[1].trim()) - Number(tmp[0].trim()) > 0 ? false : true)
             }
         })
     })
