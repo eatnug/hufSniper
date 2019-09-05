@@ -2,20 +2,6 @@ const axios = require('axios')
 const qs = require('qs')
 const cheerio = require('cheerio');
 
-const url = "https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp"
-
-const data = qs.stringify({
-    tab_lang: "K",
-    ag_ledg_year: "2019",
-    ag_ledg_sessn: "3",
-    ag_org_sect: "A",
-    campus_sect: "H!",
-    ag_crs_strct_cd: "A1CE1_H1",
-    cn: "A01733102",
-})
-
-
-const cn = "A01733102"
 
 /**
  *  axios post로 데이터 받아오는 함수

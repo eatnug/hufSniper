@@ -576,9 +576,8 @@
                         else {
                             $(e).find('td').each((ind, cur) => {
                                 if(ind == 3) {tmp = cur}
-                                else if (ind == 4 || ind == 4 || ind == 11 ||
-                                    ind == 14 || ind == 15) console.log(cur)
-                                else $(cur).remove()
+                                else if (ind != 4 && ind != 4 && ind != 11 &&
+                                    ind != 14 && ind != 15) $(cur).remove()
                             })
                             $(e).attr('onclick',`(() => {
                                 $('#list_main').append('<div>'+$(this).html()+'</div>')
