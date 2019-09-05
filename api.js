@@ -44,14 +44,14 @@ const parseGetLeftSeat = async (res, CN) => {
     })
 }
 
-const noticeEmpty = async(data, CN, cb) => {
+const scanEmpty = async(data, CN, cb) => {
     if(await parseGetLeftSeat(await getData(data), CN)) cb()
     else {
         setTimeout(async() => {
-            await noticeEmpty(data,CN,cb)
+            await scanEmpty(data,CN,cb)
         })
     }
 }
 
 console.log(data)
-module.exports = {getData, parseGetLeftSeat, noticeEmpty}
+module.exports = {getData, parseGetLeftSeat, scanEmpty}

@@ -7,7 +7,7 @@ const cheerio = require('cheerio')
 const {
   getData,
   parseGetLeftSeat,
-  noticeEmpty
+  scanEmpty
 } = require('./api')
 
 const defaultForm = {
@@ -29,9 +29,7 @@ app.post('/', async (req, res) => {
   defaultForm["ag_crs_strct_cd"] = req.body["cat"]
   defaultForm["cn"] = req.body["cn"]
   const data = qs.stringify(defaultForm)
-  console.log(data)
   const target = await getData(data)
-  // await noticeEmpty(data,req.body["cn"], () => {res.send('<script type="text/javascript">alert("자리났어");</script>');})
 })
 app.get('/', (req,res) => {
   res.render('index.ejs')
@@ -40,6 +38,9 @@ app.post('/getList', async (req,res) => {
   const html = await getData(qs.stringify(req.body))
   const target = html.data.split(`Room</button></p>`)[1]
   res.send(target)
+})
+app.post('/getLeftSeat', async (req,res) => {
+  scanEmpty(qs.stringify(req.body), req.body["cn"], () => {res.json({success: true})})
 })
 
 

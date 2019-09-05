@@ -13,9 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script language="javascript">
-        function test(value){
-            console.log(value)
-        }
         function onChange(value) {
             if (value == 1) {
                 document.getElementById('major').style.display = 'block'
@@ -27,7 +24,17 @@
                 document.getElementById('minor').style.display = 'block'
             }
         }
-
+        function scanEmpty(data,cn,elem){
+            $.ajax({
+                url: './getLeftSeat',
+                crossDomain: true,
+                type: 'POST',
+                data: data+`&cn=${cn}`,
+                success: function (data) {
+                    alert('got!')
+                }
+            })
+        }
         function modalOn() {
             document.getElementById('modal').style.display = "block"
         }
@@ -564,6 +571,7 @@
                     $('#list_modal').html(data);
                     $('#list_modal tr').each((i, e) => {
                         let tmp
+                        let tmp2 = $(e)
                         if (i == 0) $(e).remove()
                         else {
                             $(e).find('td').each((ind, cur) => {
@@ -573,7 +581,8 @@
                                 else $(cur).remove()
                             })
                             $(e).attr('onclick',`(() => {
-                                $('#list_main').append('<div cn="${tmp.innerHTML}">'+$(this).html()+'</div>')
+                                $('#list_main').append('<div>'+$(this).html()+'</div>')
+                                scanEmpty($('#form').serialize(),'${tmp.innerHTML}','${tmp2}')
                             })()`)
                         }
                     })
