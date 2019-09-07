@@ -1,25 +1,43 @@
-target : https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp
+# 수강신청 빈자리 알림 - hufSniper
 
-form tag : 
-|Key|Value|desc|
+원하는 강의를 추가해 두면 강의 시간표 페이지에 계속 접근해서 남은 자리를 확인하고 빈자리가 생기면 알려준다.
+
+## 구조
+
+### | Flow
+
+타깃 URL( 학교 강의 시간표 페이지) : https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp
+
+```
+강의 등록하기
+
+프론트에서 스나이핑 등록할 강의를 찾기위해 년도, 학기 등의 폼을 채우고 버튼을 누르면 ajax로 서버에 POST 요청을 보낸다.
+-> 서버에서 해당 정보를 가공해 타깃 URL로 POST 요청을 보낸다
+-> -> 학교 서버에서 강의 시간표 페이지를 준다.
+-> 서버에서 준 html을 파싱해서 강의 목록만 넘겨준다.
+넘겨받은 강의목록을 html에 추가해서 보여주는데 이때 onclick 함수를 추가한다.
+```
+
+```
+강의 스나이핑 하기
+
+강의 목록에서 원하는 강의를 클릭하면 onclick 함수가 실행되는데, 해당 함수는 ajax로 서버에 선택한 강의의 학수번호를 넘겨준다.
+-> 서버는 타깃 URL에 계속해서 POST 요청을 보내면서 해당 강의의 빈자리가 있는지 확인하고 빈자리가 있으면 true를 리턴한다
+true를 리턴받은 경우 강의 빈자리가 생겼다고 alert를 띄워준다.
+
+```
+
+### | 주고받는 데이터 형식
+
+수업에 대한 form data
+|Key|desc|
 |------|---|---|
-|tab_lang|K|?|
-|ag_ledg_year|2019|테스트3|
-|ag_ledg_sessn|3|학기|
-|ag_org_sect|A|소속|
-|campus_sect|H1|캠퍼스|
-|ag_crs_strct_cd|AAR01_H1|학과 코드|
-|ag_compt_fld_cd|?|교양구분 코드|
+|tab_lang|K로 설정되어있는데 뭐하는 건지 모르겠음|
+|ag_ledg_year|년도|
+|ag_ledg_sessn|학기|
+|ag_org_sect|소속|
+|campus_sect|캠퍼스|
+|ag_crs_strct_cd|전공구분 코드|
+|ag_compt_fld_cd|교양구분 코드|
+|cn|학수번호|
 
-파일을 오브젝트로 만들자
-
-course {
-    tab_lang:"",
-    ad_ledg_year:"",
-    ad_ledg_sessn:"",
-    ad_org_sect:"",
-    campus_sect:"",
-    ag_crs_strct_cd:"",
-    ag_compt_fld_cd:"",
-    CN:"",
-}
