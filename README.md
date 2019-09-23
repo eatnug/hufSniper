@@ -30,8 +30,9 @@ true를 리턴받은 경우 강의 빈자리가 생겼다고 alert를 띄워준�
 ### | 주고받는 데이터 형식
 
 수업에 대한 form data
+
 |Key|desc|
-|------|---|---|
+|------|---|
 |tab_lang|K로 설정되어있는데 뭐하는 건지 모르겠음|
 |ag_ledg_year|년도|
 |ag_ledg_sessn|학기|
