@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Course from "./Course";
 import Find from "./Find";
-import Modal from "./Modal"
+import Modal from "./Modal";
 
 class App extends React.Component {
   constructor(props) {
@@ -10,59 +10,49 @@ class App extends React.Component {
     this.state = {
       isModal: false,
       loaded: false,
-      courses: [
-        {
-          grade: 1,
-          number: "a1234",
-          title: "first",
-          professor: "eatnug",
-          time: "월 456",
-          classroom: "3203",
-          apply: "10/10"
-        },
-        {
-          grade: 1,
-          number: "b5678",
-          title: "second",
-          professor: "eatnug",
-          time: "화 123",
-          classroom: "0013",
-          apply: "20/20"
-        }
-      ]
+      trackings: []
     };
     this.modalOpener = this.openModal.bind(this);
     this.modalCloser = this.closeModal.bind(this);
+    this.trackAdder = this.addTracking.bind(this);
+    this.redunChecker = this.checkRedun.bind(this);
   }
 
   openModal = () => this.setState({ isModal: true });
   closeModal = () => this.setState({ isModal: false });
+  addTracking = course =>
+    this.setState({ trackings: this.state.trackings.concat(course) });
+  checkRedun = course =>
+    this.state.trackings.filter(c => c.courseNumber === course.courseNumber)
+      .length;
 
   render = () => {
-    const {courses, isModal} = this.state
+    const { trackings, isModal } = this.state;
     return (
       <div className="container">
         <div className="courses">
-          {courses.map(
-            (
-              { grade, number, title, professor, time, classroom, apply },
-              ind
-            ) => (
+          {trackings.map(
+            ({ grade, number, title, professor, timePlace, apply }, ind) => (
               <Course
                 key={ind}
                 grade={grade}
                 number={number}
                 title={title}
+                timePlace={timePlace}
                 professor={professor}
-                time={time}
-                classroom={classroom}
                 apply={apply}
               />
             )
           )}
         </div>
         <Find modalOpener={this.modalOpener} />
-        {isModal ? <Modal modalCloser={this.modalCloser}/> : null}
+        {isModal ? (
+          <Modal
+            modalCloser={this.modalCloser}
+            trackAdder={this.trackAdder}
+            redunChecker={this.redunChecker}
+          />
+        ) : null}
       </div>
     );
   };

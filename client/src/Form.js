@@ -26,7 +26,7 @@ class Form extends React.Component {
 
   handleSubmit = async e => {
     const rslt = await axios.post("http://127.0.0.1:4000/getList",qs.stringify(this.state))
-    console.log(rslt.data)
+    this.props.loadHandler(rslt.data)
   };
 
   render() {

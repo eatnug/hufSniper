@@ -6,9 +6,11 @@ const Course = ({
   number,
   title,
   professor,
-  time,
-  classroom,
-  apply
+  timePlace,
+  apply,
+  trackAdder,
+  redunChecker,
+  obj
 }) => {
   return (
     <div className="course">
@@ -16,10 +18,12 @@ const Course = ({
       <div className="course__number">{number}</div>
       <div className="course__title">{title}</div>
       <div className="course__professor">{professor}</div>
-      <div className="course__time">{time}</div>
-      <div className="course__classroom">{classroom}</div>
+      <div className="course__timePlace">{timePlace}</div>
       <div className="course__apply">{apply}</div>
-      <button className="addButton">Add</button>
+      <button className="addButton" onClick={() => {
+        if(!redunChecker(obj)) trackAdder(obj)
+        else alert("already tracking")
+        }}>Add</button>
     </div>
   );
 };
