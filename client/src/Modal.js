@@ -25,20 +25,20 @@ class Modal extends React.Component {
         <div className="courses">
           {this.state.courseList.map(
             (
-              { grade, number, title, professor, timePlace, apply },
+              { grade, courseNumber, title, professor, timePlace, apply },
               ind
             ) => (
               <Course
                 key={ind}
                 grade={grade}
-                number={number}
+                courseNumber={courseNumber}
                 title={title}
                 professor={professor}
                 timePlace={timePlace}
                 apply={apply}
                 trackAdder={trackAdder}
                 redunChecker={redunChecker}
-                obj={ {grade, number, title, professor, timePlace, apply} }
+                obj={ {grade, courseNumber, title, professor, timePlace, apply} }
               />
             )
           )}

@@ -22,9 +22,12 @@ class App extends React.Component {
   closeModal = () => this.setState({ isModal: false });
   addTracking = course =>
     this.setState({ trackings: this.state.trackings.concat(course) });
-  checkRedun = course =>
-    this.state.trackings.filter(c => c.courseNumber === course.courseNumber)
-      .length;
+  checkRedun = course => {
+    console.log(this.state.trackings)
+    return this.state.trackings.filter(
+      c => c.courseNumber === course.courseNumber
+    ).length;
+  };
 
   render = () => {
     const { trackings, isModal } = this.state;
@@ -32,11 +35,11 @@ class App extends React.Component {
       <div className="container">
         <div className="courses">
           {trackings.map(
-            ({ grade, number, title, professor, timePlace, apply }, ind) => (
+            ({ grade, courseNumber, title, professor, timePlace, apply }, ind) => (
               <Course
                 key={ind}
                 grade={grade}
-                number={number}
+                courseNumber={courseNumber}
                 title={title}
                 timePlace={timePlace}
                 professor={professor}
