@@ -22,10 +22,9 @@ class App extends React.Component {
   closeModal = () => this.setState({ isModal: false });
   addTracking = course =>
     this.setState({ trackings: this.state.trackings.concat(course) });
-  checkRedun = course => {
-    console.log(this.state.trackings)
+  checkRedun = courseNumber => {
     return this.state.trackings.filter(
-      c => c.courseNumber === course.courseNumber
+      c => c.courseNumber === courseNumber
     ).length;
   };
 
