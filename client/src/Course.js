@@ -15,7 +15,6 @@ const Course = ({
   return (
     <div className="course">
       <div className="course__grade">{grade} grade</div>
-      <div className="course__number">{courseNumber}</div>
       <div className="course__title">{title}</div>
       <div className="course__professor">{professor}</div>
       <div className="course__timePlace">{timePlace}</div>
