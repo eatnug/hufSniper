@@ -76,7 +76,7 @@ class Form extends React.Component {
           </select>
         </label>
         <br></br>
-        {this.state.gubun==="1" ? (
+        {this.state.gubun === "1" ? (
           <label className="form__label">
             전공:
             <select
@@ -406,7 +406,6 @@ class Form extends React.Component {
             </select>
           </label>
         )}
-
         <br></br>
         <button className="form__button" onClick={this.submitHandler}>
           Submit

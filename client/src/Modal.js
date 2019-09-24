@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "./Form";
 import Course from "./Course";
+import "./Modal.css"
 class Modal extends React.Component {
   constructor(props) {
     super(props);
