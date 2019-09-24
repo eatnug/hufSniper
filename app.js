@@ -53,6 +53,7 @@ app.post('/getList', async (req,res) => {
   })
   res.send(objs)
 })
+
 app.post('/getLeftSeat', async (req,res) => {
   scanEmpty(qs.stringify(req.body), req.body["cn"], () => {res.json({success: true})})
 })
