@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "./Form";
 import Course from "./Course";
+import "./Modal.css"
 class Modal extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +30,7 @@ class Modal extends React.Component {
               ind
             ) => (
               <Course
+                track={false}
                 key={ind}
                 grade={grade}
                 courseNumber={courseNumber}

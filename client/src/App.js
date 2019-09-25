@@ -36,6 +36,7 @@ class App extends React.Component {
           {trackings.map(
             ({ grade, courseNumber, title, professor, timePlace, apply }, ind) => (
               <Course
+                track={true}
                 key={ind}
                 grade={grade}
                 courseNumber={courseNumber}

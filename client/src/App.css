@@ -1,0 +1,4 @@
+.container .courses{
+    display: flex;
+    flex-direction: column;
+}
