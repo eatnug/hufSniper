@@ -30,6 +30,7 @@ class Modal extends React.Component {
               ind
             ) => (
               <Course
+                track={false}
                 key={ind}
                 grade={grade}
                 courseNumber={courseNumber}
