@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "client" : "cd client && yarn start" ,
-    "server" : "nodemon app.js",
-    "start" : "npm run server & npm run client"
+    "client": "cd client && yarn start",
+    "server": "nodemon app.js",
+    "start": "npm run server & npm run client"
   },
   "author": "",
   "license": "ISC",
@@ -20,7 +20,8 @@
     "form-data": "^2.5.1",
     "jsdom": "^15.1.1",
     "node-html-parser": "^1.1.16",
-    "qs": "^6.8.0"
+    "qs": "^6.8.0",
+    "react-redux": "^7.1.1"
   },
   "engines": {
     "node": "^12.8.0",
