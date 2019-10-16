@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 var cors = require("cors");
 const qs = require("qs");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 
 const { getData, scanEmpty } = require("./api");
 
