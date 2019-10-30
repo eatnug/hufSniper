@@ -6,6 +6,7 @@ const cheerio = require("cheerio");
  *  axios post로 데이터 받아오는 함수
  * @param {*} url https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp
  * @param {*} data 포스트로 넘길 폼 데이터 qs stringify
+ * @returns axios return
  */
 async function getData(data) {
   return await axios.post("https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp", data, { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" });
@@ -16,44 +17,42 @@ async function getData(data) {
  * @param {*} res http response
  * @param {*} CN course number
  */
-const parseGetLeftSeat = async (res, CN) => {
-  return new Promise((resolve, reject) => {
-    const $ = cheerio.load(res.data);
-    $("#premier1 > div > table > tbody > tr > td").each((i, e) => {
-      if (e.firstChild && e.firstChild.data == CN && e.next) {
-        const tmp = e.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.next.firstChild.data.split("/");
-        resolve(Number(tmp[1].trim()) - Number(tmp[0].trim()) < 1 ? false : true);
-      }
-    });
-  });
+const parseGetLeftSeat = (res, ind) => {
+  const $ = cheerio.load(res.data);
+  const apply = $(selector(ind, 16))
+    .text()
+    .split("/");
+  return Number(apply[1].trim()) - Number(apply[0].trim()) < 1 ;
 };
 
 const scanEmpty = async (data, CN, cb) => {
   if (await parseGetLeftSeat(await getData(data), CN)) cb();
-  else {
-    await scanEmpty(data, CN, cb);
-  }
+  else await scanEmpty(data, CN, cb);
 };
 
+/**
+ * 강의 시간표 html 페이지에서 수업 목록 파싱하는 함수
+ * @param {*} html 파싱 할 html
+ * @returns [{title,grade,courseNumber,professor,timePlace,apply},] 형태의 강의 목록 객체 배열
+ */
 const parseClass = html => {
   const $ = cheerio.load(html);
-  const target = $("#premier1 tbody tr").text();
-  const courses = target.replace(/\n\s+\n\s+((\d{1,2})\n\s+\D{2,})/gi, "$ $1").split("$");
-  courses.shift();
-  return courses
-  .map((cur, ind) => {
-    if (ind % 2 == 0) return (cur + courses[ind + 1]).replace(/[\s\n\t]{2,}([\S])/gi, "$ $1").split("$");
-  })
-  .filter((cur, ind) => ind % 2 == 0).map(cur => {
-    return {
-      title: `${cur[4]}/${cur[5]}`,
-      grade: cur[2],
-      courseNumber: cur[3],
-      professor: cur[6],
-      timePlace: cur[9],
-      apply: cur[10],
-    }
-  })
+  const count = $("#premier1 tbody tr").length;
+  const objs = [];
+  for (i = 2; i <= count; i++) {
+    objs.push({
+      title: $(`${selector(i, 5)} > div > font`).text(),
+      grade: $(selector(i, 3)).text(),
+      courseNumber: $(selector(i, 4)).text(),
+      professor: $(selector(i, 12)).text(),
+      timePlace: $(selector(i, 15)).text(),
+      apply: $(selector(i, 16)).text(),
+      index: i
+    });
+  }
+  return objs;
 };
+
+const selector = (a, b) => `#premier1 > div > table > tbody > tr:nth-child(${a}) > td:nth-child(${b})`;
 
 module.exports = { getData, parseGetLeftSeat, scanEmpty, parseClass };
