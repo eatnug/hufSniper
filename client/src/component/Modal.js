@@ -1,7 +1,8 @@
 import React from "react";
 import Form from "./Form";
 import Course from "./Course";
-import "./Modal.css"
+import "./Modal.css";
+
 class Modal extends React.Component {
   constructor(props) {
     super(props);
@@ -18,38 +19,38 @@ class Modal extends React.Component {
   };
   render() {
     const { modalCloser, trackAdder, redunChecker } = this.props;
-    return (
-      <div className="modal">
-        <div className="form__container">
-          <Form loadHandler={this.loadHandler} />
-        </div>
-        <div className="courses">
-          {this.state.courseList.map(
-            (
-              { grade, courseNumber, title, professor, timePlace, apply },
-              ind
-            ) => (
-              <Course
-                track={false}
-                key={ind}
-                grade={grade}
-                courseNumber={courseNumber}
-                title={title}
-                professor={professor}
-                timePlace={timePlace}
-                apply={apply}
-                trackAdder={trackAdder}
-                redunChecker={redunChecker}
-                obj={ {grade, courseNumber, title, professor, timePlace, apply} }
-              />
-            )
-          )}
-        </div>
-        <button className="modal__closer" onClick={modalCloser}>
-          Close
-        </button>
-      </div>
-    );
+return (
+  <div className="modal">
+    <div className="form__container">
+      <Form loadHandler={this.loadHandler} />
+    </div>
+    <div className="courses">
+      {this.state.courseList.map(
+        (
+          { grade, courseNumber, title, professor, timePlace, apply, index },
+          ind
+        ) => (
+          <Course
+            track={false}
+            key={ind}
+            grade={grade}
+            courseNumber={courseNumber}
+            title={title}
+            professor={professor}
+            timePlace={timePlace}
+            apply={apply}
+            trackAdder={trackAdder}
+            redunChecker={redunChecker}
+            obj={ {grade, courseNumber, title, professor, timePlace, apply, index} }
+          />
+        )
+      )}
+    </div>
+    <button className="modal__closer" onClick={modalCloser}>
+      Close
+    </button>
+  </div>
+);
   }
 }
 
