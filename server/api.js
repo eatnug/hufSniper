@@ -17,19 +17,17 @@ async function getData(data) {
  * @param {*} res http response
  * @param {*} CN course number
  */
-const parseGetLeftSeat = async (html, index) => {
-  return new Promise(resolve => {
-    const $ = cheerio.load(html);
-    const apply = $(selector(index, 16))
-      .text()
-      .split("/");
-    resolve(Number(apply[1].trim()) - Number(apply[0].trim()) < 1);
-  });
+const parseGetLeftSeat = function (html, index) {
+  const $ = cheerio.load(html);
+  const apply = $(selector(index, 16))
+    .text()
+    .split("/");
+  return Number(apply[1].trim()) - Number(apply[0].trim()) > 0;
 };
 
-const detect = async (html, index, send) => {
-  if (await parseGetLeftSeat(html, index)) send({"code":true})
-  else await detect(html, index);
+const detect = function (html, index, send) {
+  if (parseGetLeftSeat(html,index)) send({"code":true})
+  else setTimeout(() => {detect(html, index, send)},1);
 };
 
 /**

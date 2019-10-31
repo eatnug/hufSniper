@@ -24,14 +24,17 @@ app.get("/", (req, res) => {
 
 app.post("/getList", async (req, res) => {
   const html = await getData(qs.stringify(req.body));
-  res.send(parseClass(html.data));
+  setTimeout(() => {
+    res.send(parseClass(html.data));
+  }, 10000)
 });
 
-app.post("/getLeftSeat", async (req, res) => {
+app.post("/getLeftSeat", async function(req,res) {
   const html = await getData(qs.stringify(req.body));
-  detect(html.data, req.body.index, res.json);
+  detect(html.data, req.body.index, (data) => res.json(data));
 });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
+
