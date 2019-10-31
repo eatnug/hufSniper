@@ -5,7 +5,7 @@ var cors = require("cors");
 const qs = require("qs");
 const PORT = process.env.PORT || 4000;
 
-const { parseClass, getData, scanEmpty } = require("./api");
+const { parseClass, getData, parseGetLeftSeat ,scanEmpty } = require("./api");
 
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
@@ -16,9 +16,6 @@ app.use(
 );
 
 app.use(cors());
-app.get("/test", (req, res) => {
-  res.send("test suck");
-});
 
 app.get("/", (req, res) => {
   res.send(`
@@ -31,10 +28,13 @@ app.post("/getList", async (req, res) => {
 });
 
 app.post("/getLeftSeat", async (req, res) => {
-  scanEmpty(qs.stringify(req.body), req.body["cn"], () => {
-    res.json({ success: true });
-  });
+  const html = await getData(qs.stringify(req.body));
+  res.send(parseGetLeftSeat(html, req.body.index))
 });
+
+app.get("/worker", (req, res) => {
+  res.send('ok')
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);

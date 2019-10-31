@@ -1,7 +1,6 @@
 const axios = require("axios");
 const qs = require("qs");
 const cheerio = require("cheerio");
-
 /**
  *  axios post로 데이터 받아오는 함수
  * @param {*} url https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp
@@ -17,9 +16,9 @@ async function getData(data) {
  * @param {*} res http response
  * @param {*} CN course number
  */
-const parseGetLeftSeat = (res, ind) => {
+const parseGetLeftSeat = (res, index) => {
   const $ = cheerio.load(res.data);
-  const apply = $(selector(ind, 16))
+  const apply = $(selector(index, 16))
     .text()
     .split("/");
   return Number(apply[1].trim()) - Number(apply[0].trim()) < 1 ;
