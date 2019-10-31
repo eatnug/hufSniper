@@ -20,8 +20,10 @@ class App extends React.Component {
 
   openModal = () => this.setState({ isModal: true });
   closeModal = () => this.setState({ isModal: false });
-  addTracking = course =>
+  addTracking = course =>{
+    axios.post()
     this.setState({ trackings: this.state.trackings.concat(course) });
+  }
   checkRedun = courseNumber => {
     return this.state.trackings.filter(
       c => c.courseNumber === courseNumber
@@ -34,7 +36,7 @@ class App extends React.Component {
       <div className="container">
         <div className="courses">
           {trackings.map(
-            ({ grade, courseNumber, title, professor, timePlace, apply }, ind) => (
+            ({ grade, courseNumber, title, professor, timePlace, apply, index }, ind) => (
               <Course
                 track={true}
                 key={ind}
@@ -44,6 +46,7 @@ class App extends React.Component {
                 timePlace={timePlace}
                 professor={professor}
                 apply={apply}
+                index={index}
               />
             )
           )}
