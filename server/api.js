@@ -1,6 +1,7 @@
 const axios = require("axios");
 const qs = require("qs");
 const cheerio = require("cheerio");
+
 /**
  *  axios post로 데이터 받아오는 함수
  * @param {*} url https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp
@@ -16,17 +17,19 @@ async function getData(data) {
  * @param {*} res http response
  * @param {*} CN course number
  */
-const parseGetLeftSeat = (res, index) => {
-  const $ = cheerio.load(res.data);
-  const apply = $(selector(index, 16))
-    .text()
-    .split("/");
-  return Number(apply[1].trim()) - Number(apply[0].trim()) < 1 ;
+const parseGetLeftSeat = async (html, index) => {
+  return new Promise(resolve => {
+    const $ = cheerio.load(html);
+    const apply = $(selector(index, 16))
+      .text()
+      .split("/");
+    resolve(Number(apply[1].trim()) - Number(apply[0].trim()) < 1);
+  });
 };
 
-const scanEmpty = async (data, CN, cb) => {
-  if (await parseGetLeftSeat(await getData(data), CN)) cb();
-  else await scanEmpty(data, CN, cb);
+const detect = async (html, index, send) => {
+  if (await parseGetLeftSeat(html, index)) send({"code":true})
+  else await detect(html, index);
 };
 
 /**
@@ -54,4 +57,4 @@ const parseClass = html => {
 
 const selector = (a, b) => `#premier1 > div > table > tbody > tr:nth-child(${a}) > td:nth-child(${b})`;
 
-module.exports = { getData, parseGetLeftSeat, scanEmpty, parseClass };
+module.exports = { getData, parseGetLeftSeat, parseClass, detect };
