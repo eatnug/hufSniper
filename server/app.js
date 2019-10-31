@@ -24,9 +24,7 @@ app.get("/", (req, res) => {
 
 app.post("/getList", async (req, res) => {
   const html = await getData(qs.stringify(req.body));
-  setTimeout(() => {
-    res.send(parseClass(html.data));
-  }, 10000)
+  res.send(parseClass(html.data));
 });
 
 app.post("/getLeftSeat", async function(req,res) {
