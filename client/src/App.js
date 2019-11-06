@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { modalOn, modalOff } from "./actions";
+import Modal from "./Modal";
 function App() {
+  const isModal = useSelector(state => state.isModal);
+  const dispatch = useDispatch();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => dispatch(modalOn())}>Find</button>
+      {isModal ? (
+        <div>
+          <Modal />
+          <button onClick={() => dispatch(modalOff())}>off</button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
