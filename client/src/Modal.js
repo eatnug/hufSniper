@@ -208,8 +208,8 @@ const Modal = () => {
         <button
           className="form__button"
           onClick={async () => {
-            const rslt = await axios.post("http://127.0.0.1/getList", qs.stringify(form));
-            return setCourses([...rslt])
+            const rslt = await axios.post("http://127.0.0.1:3000/api/getList", qs.stringify(form));
+            return setCourses([...rslt.data])
           }}
         >
           Submit
@@ -217,7 +217,7 @@ const Modal = () => {
       </div>
       <div className="courses">
         {courses.map((cur, ind) => (
-          <Course />
+          <Course key={ind} ctx={cur}/>
         ))}
       </div>
     </div>
