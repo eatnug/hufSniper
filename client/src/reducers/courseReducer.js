@@ -6,7 +6,7 @@ const courseReducer = (state=[], action) => {
                 action.course
             ]
         case "REM_COURSE":
-            return state.filter(cur=>cur.info.courseNumber!=action.courseNumber)
+            return state.filter(cur=>cur.info.courseNumber!==action.courseNumber)
         default:
             return state
     }

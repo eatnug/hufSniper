@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import qs from "qs";
 import Course from "./Course";
-import { addCourse, remCourse } from "./actions";
 const Modal = () => {
   const [form, setForm] = useState({ tab_lang: "K", ag_ledg_year: "2019", ag_ledg_sessn: "1", gubun: "1", ag_crs_strct_cd: "AAR01_H1", ag_compt_fld_cd: "301_H1" });
   const [courses, setCourses] = useState([]);

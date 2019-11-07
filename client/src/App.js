@@ -5,11 +5,15 @@ import Modal from "./Modal";
 import Course from "./Course";
 function App() {
   const isModal = useSelector(state => state.isModal);
-  const courses = useSelector(state => state.courses)
+  const courses = useSelector(state => state.courses);
   const dispatch = useDispatch();
   return (
     <div className="App">
-      {courses.map((cur,ind) => <Course key={ind} course={cur.info} ctx={cur.ctx} where={"App"}/>)}
+      <div>
+        {courses.map((cur, ind) => (
+          <Course key={ind} course={cur.info} ctx={cur.ctx} where={"App"} />
+        ))}
+      </div>
       <button onClick={() => dispatch(modalOn())}>Find</button>
       {isModal ? (
         <div>
