@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import qs from "qs";
 import Course from "./Course";
+import { addCourse, remCourse } from "./actions";
 const Modal = () => {
   const [form, setForm] = useState({ tab_lang: "K", ag_ledg_year: "2019", ag_ledg_sessn: "1", gubun: "1", ag_crs_strct_cd: "AAR01_H1", ag_compt_fld_cd: "301_H1" });
   const [courses, setCourses] = useState([]);
@@ -209,7 +211,7 @@ const Modal = () => {
           className="form__button"
           onClick={async () => {
             const rslt = await axios.post("http://127.0.0.1:3000/api/getList", qs.stringify(form));
-            return setCourses([...rslt.data])
+            return setCourses([...rslt.data]);
           }}
         >
           Submit
@@ -217,7 +219,7 @@ const Modal = () => {
       </div>
       <div className="courses">
         {courses.map((cur, ind) => (
-          <Course key={ind} ctx={cur}/>
+          <Course key={ind} course={cur} ctx={form} where={"form"} />
         ))}
       </div>
     </div>

@@ -2,11 +2,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { modalOn, modalOff } from "./actions";
 import Modal from "./Modal";
+import Course from "./Course";
 function App() {
   const isModal = useSelector(state => state.isModal);
+  const courses = useSelector(state => state.courses)
   const dispatch = useDispatch();
   return (
     <div className="App">
+      {courses.map((cur,ind) => <Course key={ind} course={cur} where={"App"}/>)}
       <button onClick={() => dispatch(modalOn())}>Find</button>
       {isModal ? (
         <div>
