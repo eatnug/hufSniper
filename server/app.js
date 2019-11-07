@@ -22,12 +22,12 @@ app.get("/", (req, res) => {
   It's hufNiper's API server by eaTnuGkraP. Let's snipe!`);
 });
 
-app.post("/getList", async (req, res) => {
+app.post("/api/getList", async (req, res) => {
   const html = await getData(qs.stringify(req.body));
   res.send(parseClass(html.data));
 });
 
-app.post("/getLeftSeat", async function(req,res) {
+app.post("/api/getLeftSeat", async function(req,res) {
   const html = await getData(qs.stringify(req.body));
   detect(html.data, req.body.index, (data) => res.json(data));
 });
