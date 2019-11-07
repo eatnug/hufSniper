@@ -1,7 +1,7 @@
 const axios = require("axios");
 const qs = require("qs");
 const cheerio = require("cheerio");
-
+const crypto = require("crypto");
 /**
  *  axios post로 데이터 받아오는 함수
  * @param {*} url https://wis.hufs.ac.kr/src08/jsp/lecture/LECTURE2020L.jsp
@@ -17,7 +17,7 @@ async function getData(data) {
  * @param {*} res http response
  * @param {*} CN course number
  */
-const parseGetLeftSeat = function (html, index) {
+const parseGetLeftSeat = function(html, index) {
   const $ = cheerio.load(html);
   const apply = $(selector(index, 16))
     .text()
@@ -25,9 +25,13 @@ const parseGetLeftSeat = function (html, index) {
   return Number(apply[1].trim()) - Number(apply[0].trim()) > 0;
 };
 
-const detect = function (html, index, send) {
-  if (parseGetLeftSeat(html,index)) send({"code":true})
-  else setTimeout(() => {detect(html, index, send)},1);
+const detect = function(tracker, hash, html, index, send) {
+  if (parseGetLeftSeat(html, index)) send({ code: true, hash });
+  else if (!tracker.includes(hash)) send({ code: false, hash });
+  else
+    setTimeout(() => {
+      detect(tracker, hash, html, index, send);
+    }, 1000);
 };
 
 /**

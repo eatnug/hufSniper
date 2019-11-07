@@ -9,7 +9,7 @@ function App() {
   const dispatch = useDispatch();
   return (
     <div className="App">
-      {courses.map((cur,ind) => <Course key={ind} course={cur} where={"App"}/>)}
+      {courses.map((cur,ind) => <Course key={ind} course={cur.info} ctx={cur.ctx} where={"App"}/>)}
       <button onClick={() => dispatch(modalOn())}>Find</button>
       {isModal ? (
         <div>
