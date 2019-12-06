@@ -25,12 +25,12 @@ const parseGetLeftSeat = function(html, index) {
   return Number(apply[1].trim()) - Number(apply[0].trim()) > 0;
 };
 
-const detect = function(tracker, hash, html, index, send) {
+const detect = function(isIn, hash, html, index, send) {
   if (parseGetLeftSeat(html, index)) send({ code: true, hash });
-  else if (!tracker.includes(hash)) send({ code: false, hash });
+  else if (!iIn(hash)) send({ code: false, hash });
   else
     setTimeout(() => {
-      detect(tracker, hash, html, index, send);
+      detect(isIn, hash, html, index, send);
     }, 1000);
 };
 
