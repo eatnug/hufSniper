@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 4000;
 const crypto = require("crypto");
 const { parseClass, getData, parseGetLeftSeat, detect } = require("./api");
 const tracker = [];
+const isIn = (hash) => {
+  return tracker.includes(hash)
+}
 
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
@@ -35,7 +38,7 @@ app.post("/api/getLeftSeat", async function(req, res) {
     .update(html.data + req.body.index)
     .digest("base64");
   tracker.push(hash);
-  detect(tracker, hash, html.data, req.body.index, data => {
+  detect(isIn, hash, html.data, req.body.index, data => {
     if (data.code) tracker.splice(tracker.indexOf(hash), 1);
     res.json(data);
   });
@@ -47,7 +50,7 @@ app.post("/api/stopTracking", async (req, res) => {
     .createHash("sha256")
     .update(html.data + req.body.index)
     .digest("base64");
-  if (tracker.includes(hash)) tracker.splice(tracker.indexOf(hash), 1);
+  if (isIn(hash)) tracker.splice(tracker.indexOf(hash), 1);
 });
 
 app.listen(PORT, () => {
