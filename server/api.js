@@ -27,7 +27,7 @@ const parseGetLeftSeat = function(html, index) {
 
 const detect = function(isIn, hash, html, index, send) {
   if (parseGetLeftSeat(html, index)) send({ code: true, hash });
-  else if (!iIn(hash)) send({ code: false, hash });
+  else if (!isIn(hash)) send({ code: false, hash });
   else
     setTimeout(() => {
       detect(isIn, hash, html, index, send);
