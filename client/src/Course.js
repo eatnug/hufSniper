@@ -12,7 +12,7 @@ const Course = ({ ctx, course, where }) => {
         <button
           onClick={() => {
             axios.post("http://127.0.0.1:3000/api/getLeftSeat", qs.stringify({ ...ctx, index: course.index })).then(res => {
-              alert(res.data.code);
+              const noti = new Notification("hufSniper",{body:res.data.code});
               dispatch(remCourse(course.courseNumber));
             });
             return dispatch(addCourse({info:course,ctx}));
@@ -24,7 +24,7 @@ const Course = ({ ctx, course, where }) => {
         <button
           onClick={() => {
             axios.post("http://127.0.0.1:3000/api/stopTracking", qs.stringify({ ...ctx, index: course.index })).then(res => {
-              alert(res.data.code);
+              const noti = new Notification("hufSniper",{body:res.data.code});
             });
             return dispatch(remCourse(course.courseNumber));
           }}
