@@ -50,7 +50,11 @@ app.post("/api/stopTracking", async (req, res) => {
     .createHash("sha256")
     .update(html.data + req.body.index)
     .digest("base64");
-  if (isIn(hash)) tracker.splice(tracker.indexOf(hash), 1);
+  if (isIn(hash)) {
+    tracker.splice(tracker.indexOf(hash), 1);
+    res.json({code:"success stop tracking"})
+  }
+  res.json({code:"not in list"})
 });
 
 app.listen(PORT, () => {
