@@ -1,0 +1,29 @@
+$app_bg: #d5e1df;
+$track__container_bg: #b5e7a0;
+body > #root > .App {
+  height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  background: $app_bg;
+}
+
+.tracks__container {
+  width: 70%;
+  background: $track__container_bg;
+  margin-top: 50px;
+}
+
+.modal__container {
+  z-index: 1;
+  position: absolute;
+  background: $track__container_bg;
+  width: 600px;
+  top: 100px;
+  left: auto;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0);
+}

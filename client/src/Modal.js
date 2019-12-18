@@ -6,8 +6,8 @@ const Modal = () => {
   const [form, setForm] = useState({ tab_lang: "K", ag_ledg_year: "2019", ag_ledg_sessn: "1", gubun: "1", ag_crs_strct_cd: "AAR01_H1", ag_compt_fld_cd: "301_H1" });
   const [courses, setCourses] = useState([]);
   return (
-    <div className="modal">
-      <div className="form">
+    <div className="modal__self">
+      <div className="modal__form">
         <label className="form__label">
           년도:
           <select className="form__select" id="ag_ledg_year" value={form.ag_ledg_year} onChange={e => setForm({ ...form, ag_ledg_year: e.target.value })}>
@@ -205,17 +205,19 @@ const Modal = () => {
           </label>
         )}
         <br></br>
-        <button
-          className="form__button"
-          onClick={async () => {
-            const rslt = await axios.post("http://127.0.0.1:3000/api/getList", qs.stringify(form));
-            return setCourses([...rslt.data]);
-          }}
-        >
-          Submit
-        </button>
+        <div className="button__container">
+          <button
+            className="button__self"
+            onClick={async () => {
+              const rslt = await axios.post("http://127.0.0.1:3000/api/getList", qs.stringify(form));
+              return setCourses([...rslt.data]);
+            }}
+          >
+            Submit
+          </button>
+        </div>
       </div>
-      <div className="courses">
+      <div className="courses__container">
         {courses.map((cur, ind) => (
           <Course key={ind} course={cur} ctx={form} where={"form"} />
         ))}

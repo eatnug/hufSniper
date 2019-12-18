@@ -6,7 +6,7 @@ import qs from "qs";
 const Course = ({ ctx, course, where }) => {
   const dispatch = useDispatch();
   return (
-    <div className="course">
+    <div className="course__container">
       <div className="course__detail">{`${course.title} //${course.professor}// ${course.apply}`}</div>
       {where === "form" ? (
         <button
