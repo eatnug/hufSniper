@@ -1,5 +1,5 @@
 import React from "react";
-import './App.css'
+import './App.scss'
 import { useSelector, useDispatch } from "react-redux";
 import { modalOn, modalOff } from "./actions";
 import Modal from "./Modal";
