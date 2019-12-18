@@ -54,7 +54,9 @@ app.post("/api/stopTracking", async (req, res) => {
     tracker.splice(tracker.indexOf(hash), 1);
     res.json({code:"success stop tracking"})
   }
-  res.json({code:"not in list"})
+  else{
+    res.json({code:"not in list"})
+  }
 });
 
 app.listen(PORT, () => {
