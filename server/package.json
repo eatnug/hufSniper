@@ -16,7 +16,7 @@
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "form-data": "^2.5.1",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "node-html-parser": "^1.1.16",
     "qs": "^6.8.0",
     "react-redux": "^7.1.1"
