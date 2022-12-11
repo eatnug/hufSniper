@@ -14,7 +14,7 @@
     "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "ejs": "^2.7.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "form-data": "^2.5.1",
     "jsdom": "^15.1.1",
     "node-html-parser": "^1.1.16",
